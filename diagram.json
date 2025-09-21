@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "author": "Handi Pradana",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 43.1, "left": 52.6, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": 50.17, "left": 225.94, "attrs": {} },
+    { "type": "wokwi-mpu6050", "id": "imu1", "top": 243.82, "left": -55.28, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "dht1:VCC", "red", [ "v0.25", "h92.67" ] ],
+    [ "esp:GND.1", "dht1:GND", "black", [ "h0" ] ],
+    [ "esp:D15", "dht1:SDA", "green", [ "h0" ] ],
+    [ "imu1:VCC", "esp:3V3", "red", [ "v-28.8", "h172.88", "v-19.2" ] ],
+    [ "imu1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "imu1:SCL", "esp:D22", "gold", [ "v-192", "h163.28", "v19.5" ] ],
+    [ "imu1:SDA", "esp:D21", "blue", [ "v-220.8", "h182.48", "v77.2" ] ]
+  ],
+  "dependencies": {}
+}
