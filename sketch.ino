@@ -114,7 +114,8 @@ void connectAWS()
     net.setPrivateKey(AWS_CERT_PRIVATE);
 
     // Connect to the MQTT broker on the AWS endpoint we defined earlier
-    client.setServer(AWS_IOT_ENDPOINT, 8883);
+    client.setServer(AWS_IOT_ENDPOINT, 443);
+    // client.setServer(AWS_IOT_ENDPOINT, 8883);
 
     // Create a message handler
     client.setCallback(messageHandler);
@@ -196,4 +197,5 @@ void loop()
     publishMessage();
     client.loop();
     delay(1000);
+
 }
