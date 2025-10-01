@@ -94,29 +94,29 @@ void connectAWS() {
 
 void publishMessage() {
     StaticJsonDocument<200> doc;
-    sensors_event_t a, g, temperature;
-    mpu.getEvent(&a, &g, &temperature);
+    sensors_event_t a, g, tempSensor;
+    mpu.getEvent(&a, &g, &tempSensor);
 
-    float temp = dht.readTemperature();
+    float temperature = dht.readTemperature();
     float humidity = dht.readHumidity();
 
-    if (isnan(temp)) {
-        Serial.println("⚠️ Temp NaN, set -999");
-        temp = -999;
+    if (isnan(temperature)) {
+        Serial.println("⚠️ Temperature NaN, set -999");
+        temperature = -999;
     }
     if (isnan(humidity)) {
         Serial.println("⚠️ Humidity NaN, set -1");
         humidity = -1;
     }
 
-    doc["accel_x"] = a.acceleration.x;
-    doc["accel_y"] = a.acceleration.y;
-    doc["accel_z"] = a.acceleration.z;
-    doc["gyro_x"]  = g.gyro.x;
-    doc["gyro_y"]  = g.gyro.y;
-    doc["gyro_z"]  = g.gyro.z;
-    doc["humidity"]= humidity;
-    doc["temp"]    = temp;
+    doc["accel_x"]    = a.acceleration.x;
+    doc["accel_y"]    = a.acceleration.y;
+    doc["accel_z"]    = a.acceleration.z;
+    doc["gyro_x"]     = g.gyro.x;
+    doc["gyro_y"]     = g.gyro.y;
+    doc["gyro_z"]     = g.gyro.z;
+    doc["humidity"]   = humidity;
+    doc["temperature"]= temperature;
 
     char jsonBuffer[512];
     serializeJson(doc, jsonBuffer);
